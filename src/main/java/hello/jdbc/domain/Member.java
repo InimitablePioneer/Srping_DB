@@ -6,7 +6,7 @@ import lombok.Data;
 public class Member {
 
     private String memberId;
-        private int money;
+    private int money;
 
     public Member() {
     }

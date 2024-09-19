@@ -26,11 +26,11 @@ public class MemberRepositoryV0 {
             log.error("db error", e);
             throw e;
         }finally {
-
+            close(con, pstmt, null);
         }
     }
 
-    private void close(Connection con, Statement stmt, ResultSet rs) {
+    private void close(Connection con, Statement pstmt, ResultSet rs) {
         if (rs != null) {
             try {
                 rs.close();
@@ -39,14 +39,19 @@ public class MemberRepositoryV0 {
             }
 
         }
-        if (stmt != null) {
+        if (pstmt != null) {
             try {
-                stmt.close();
+                pstmt.close();
             } catch (SQLException e) {
                 log.info("error", e);
             }
         }
-        if () {
+        if (con != null) {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                log.info("error", e);
+            }
         }
 
     }
