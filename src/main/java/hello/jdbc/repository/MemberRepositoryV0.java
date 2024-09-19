@@ -30,6 +30,23 @@ public class MemberRepositoryV0 {
         }
     }
 
+    public Member findById() {
+        String sql = "select * from member where member_id = ?";
+
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();
+            pstmt = con.prepareStatement(sql);
+        } catch (SQLException e) {
+            log.
+        }
+
+
+    }
+
     private void close(Connection con, Statement pstmt, ResultSet rs) {
         if (rs != null) {
             try {
