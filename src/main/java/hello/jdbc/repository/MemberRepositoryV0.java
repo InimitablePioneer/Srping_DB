@@ -5,6 +5,7 @@ import hello.jdbc.domain.Member;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.*;
+import java.util.NoSuchElementException;
 import java.util.Stack;
 
 @Slf4j
@@ -25,12 +26,12 @@ public class MemberRepositoryV0 {
         } catch (SQLException e) {
             log.error("db error", e);
             throw e;
-        }finally {
+        } finally {
             close(con, pstmt, null);
         }
     }
 
-    public Member findById() {
+    public Member findById(String memberId) throws SQLException {
         String sql = "select * from member where member_id = ?";
 
         Connection con = null;
@@ -40,11 +41,26 @@ public class MemberRepositoryV0 {
         try {
             con = getConnection();
             pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, memberId);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Member member = new Member();
+                member.setMemberId(rs.getString("member_id"));
+                member.setMoney(rs.getInt("money"));
+                return member;
+            } else {
+                throw new NoSuchElementException("member not fount memberId=" + memberId);
+            }
+
+
         } catch (SQLException e) {
-            log.
+            log.error("db error ", e);
+            throw e;
+        } finally {
+            close(con, pstmt, rs);
         }
-
-
     }
 
     private void close(Connection con, Statement pstmt, ResultSet rs) {
