@@ -115,7 +115,7 @@ public class MemberRepositoryV0 {
 
         }
         if (stmt != null) {
-            try {
+            try {   
                 stmt.close();
             } catch (SQLException e) {
                 log.info("error", e);

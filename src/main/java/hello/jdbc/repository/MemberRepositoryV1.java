@@ -15,8 +15,7 @@ import java.util.NoSuchElementException;
 @Slf4j
 public class MemberRepositoryV1 {
 
-    private final DataSource dataSource;
-
+    private final DataSource dataSource ;
     public MemberRepositoryV1(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -29,12 +28,12 @@ public class MemberRepositoryV1 {
         try {
             con = getConnection();
             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, member.getMemberId());
+            pstmt .setString(1, member.getMemberId());
             pstmt.setInt(2, member.getMoney());
             pstmt.executeUpdate();
             return member;
         } catch (SQLException e) {
-            log.error("db error", e);
+            log.error("d b error", e);
             throw e;
         } finally {
             close(con, pstmt, null);

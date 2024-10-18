@@ -16,6 +16,7 @@ public class MemberServiceV1 {
         Member toMember = memberRepository.findById(toId);
 
         memberRepository.update(formId, fromMember.getMoney() - money);
+        validation(toMember);
         memberRepository.update(toId, toMember.getMoney() + money);
 
 
@@ -23,7 +24,7 @@ public class MemberServiceV1 {
 
     private void validation(Member toMember) {
         if (toMember.getMemberId().equals("ex")) {
-
+            throw new IllegalStateException("이체중 예외 발생");
         }
     }
 }
