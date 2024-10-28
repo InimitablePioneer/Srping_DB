@@ -17,7 +17,6 @@ import java.sql.SQLException;
  * 트랜잭션 - 트랜잭션 템플릿
  */
 @Slf4j
-@RequiredArgsConstructor
 public class MemberServiceV3_2 {
 
     //private final PlatformTransactionManager transactionManager;
@@ -38,8 +37,6 @@ public class MemberServiceV3_2 {
                 throw new RuntimeException(e);
             }
         });
-
-
     }
 
     private void bizLogic(String formId, String toId, int money) throws SQLException {
