@@ -82,6 +82,13 @@ public class MemberServiceV3_3Test {
         memberRepository.delete(MEMBER_EX);
     }
 
+    @Test
+    void AopCheck() {
+        log.info("memberService class={}",memberService.getClass());
+        log.info("memberRepository class ={}", memberRepository.getClass());
+
+    }
+
 
     @Test
     @DisplayName("정상 이체")
