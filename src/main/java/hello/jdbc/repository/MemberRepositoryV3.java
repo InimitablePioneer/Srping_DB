@@ -30,7 +30,7 @@ public class MemberRepositoryV3 {
         try {
             con = getConnection();
             pstmt = con.prepareStatement(sql);
-            pstmt .setString(1, member.getMemberId());
+            pstmt.setString(1, member.getMemberId());
             pstmt.setInt(2, member.getMoney());
             pstmt.executeUpdate();
             return member;
